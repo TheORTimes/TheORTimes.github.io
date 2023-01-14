@@ -1,0 +1,318 @@
+@font-face {
+    font-family: 'Minecraft';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Minecraft'), url('fonts/MinecraftRegular.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Minecraft Ten';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Minecraft Ten'), url('fonts/MinecraftTen.ttf') format('truetype');
+}
+
+:root {
+    --bodyBackground:rgba(0,0,0.4);
+    --navBackground: rgba(0,0,0,0.9);
+
+    --newspaperBackground: url('assets/book_high.webp')!important;; /* Avif normally but some browsers just dont support it */
+
+    --bookColor:#552315;
+
+    --notActive:rgba(140,140,140,1);
+    --active:rgba(255,255,255,1);
+
+
+    --navHeight:50px;
+}
+
+* {
+    outline:none;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Minecraft';
+    color:var(--bookColor);
+}
+body {
+    background:url('assets/dirt.webp');
+    height:90vh;
+}
+nav {
+    position:fixed;
+    width:100%;
+    height:var(--navHeight);
+    background:var(--navBackground);
+    bottom:0;
+    z-index:1000;
+}
+nav ul {
+    display:flex;
+    height:100%;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+}
+nav ul li {
+    display:flex;
+    width:100%;
+    height:100%;
+    align-items: center;
+    justify-content: center;
+}
+nav ul li:hover svg {
+    fill:var(--active);
+}
+svg {
+    width:28px;
+    fill:var(--notActive);
+}
+.active {
+    fill:var(--active);
+}
+a {
+    display: inline-block;
+    width:100%;
+    height:100%;
+    text-decoration: none;
+}
+.soon::after {
+    position:absolute;
+    content:"Volume picker soon!";
+    width:fit-content;
+    padding:0px 20px;
+    line-height:30px;
+    height:30px;
+    top:-30px;
+    background:yellow;
+    display:none;
+}
+.soon:hover::after {
+    display:inline-block;
+}
+
+.ad {
+    color:#bf3502;
+}
+section {
+    position: relative;
+    width:100%;
+    height: 100%;
+    /*height:calc(100vh - var(--navHeight));*/
+    display:flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.background {
+    position:absolute;
+}
+
+.newspaper {
+    position:relative;
+    height:100%;
+    display: flex;
+    padding:50px 70px 60px 70px;
+    background:#FFF;
+    background:var(--newspaperBackground);
+    aspect-ratio: 0.81/1;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-size: contain;
+    background-position: center top;
+}
+
+.newspaper-inner {
+    position:relative;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+    padding-bottom:30px;
+}
+
+.line {
+    position:relative;
+    display:flex;
+    width:100%;
+    height:fit-content;
+    text-align: center;
+}
+.header {
+    position:relative;
+    width:100%;
+    font-size:450%;
+    font-family: 'Minecraft Ten';
+    align-items: center;
+    justify-content: center;
+}
+.volume {
+    position:relative;
+    width:100%;
+    align-items: center;
+    justify-content: center;
+    border-top:3px solid var(--bookColor);
+    border-bottom:1px solid var(--bookColor);
+    text-transform: uppercase;
+    margin-bottom:4px;
+}
+.flex-equal {
+    width:100%;
+}
+.full-topic {
+    margin:2px 0px;
+}
+.topic-title {
+    font-weight: 700;
+    font-size:125%;
+}
+.topic-author {
+    height:8px;
+    top:-7px;
+    font-size:75%;
+}
+.topic-content {
+    text-align: left;
+    line-height:15px;
+    gap:5px;
+}
+.distance {
+    position:relative;
+    height:4px;
+}
+.tag {
+    font-weight:500;
+    margin-left:20px;
+    border:1px solid var(--bookColor);
+    padding:0px 6px;
+    font-size:75%;
+}
+.next-page {
+    position:absolute;
+    width:50%;
+    height:70px;
+    bottom:5vh;
+    right:0;
+    background:transparent;
+    z-index:1000;
+    cursor:pointer;
+}
+@media only screen and (orientation:landscape) {
+    .newspaper,.newspaper-inner {
+        overflow-y: auto;
+    }
+    @media only screen and (max-height: 200px) {
+        /*body {
+            rotate:90deg;
+        }*/
+        :root {
+            --navHeight:40px;
+        }
+        nav {
+            display:none;
+        }
+        .header {
+            font-size:150%;
+        }
+        .volume div {
+            flex: 1 1 100%;
+        }
+        .newspaper {
+            padding:35px 30px 30px 30px;
+            height:100vh;
+        }
+        .volume {
+            border-top:2px solid var(--bookColor);
+            font-size:10px;
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 2px;
+        }
+        .volume div {
+            flex: 2 1 50%;
+        }
+        .full-topic {
+            margin: 2px 0px;
+        }
+        .flex-center {
+            order: 3;
+        }
+        .topic-title {
+            font-size:70%;
+        }
+        .topic-content {
+            font-size:65%;
+            line-height:9px;
+        }
+        .topic-author {
+            top:-4px;
+            font-size:65%;
+            height:11px;
+            margin-bottom:-2px;
+        }
+        .landscape-padding {
+            position: relative;
+            width:100%;
+            height:100px;
+        }
+    }
+}
+@media only screen and (max-width: 600px) {
+    :root {
+        --newspaperBackground: url('assets/book_high_long.webp')!important; /* Avif */
+    }
+    .newspaper {
+        aspect-ratio: 0.6/1;
+        max-width:100vw;
+        height: calc(100% - 50px);
+        padding:35px 45px 50px 45px;
+    }
+    .newspaper-inner {
+        overflow-y: auto;
+    }
+    .header {
+        font-size:250%;
+        height:33px;
+    }
+    .volume {
+        border-top:2px solid var(--bookColor);
+        font-size:12px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .volume div {
+        flex: 2 1 50%;
+    }
+    .full-topic {
+        margin: 2px 0px;
+    }
+    .flex-center {
+        order: 3;
+    }
+    .topic-title {
+        font-size:80%;
+    }
+    .topic-content {
+        font-size:70%;
+        line-height:10px;
+    }
+    .topic-author {
+        top:-4px;
+        font-size:65%;
+        height:11px;
+        margin-bottom:-2px;
+    }
+    .edge {
+        position:relative;
+        height:100%;
+        display: flex;
+        padding:50px 70px 14px 70px;
+        background:url('assets/book_high_long.webp')!important;;
+        aspect-ratio: 0.6/1;
+        height:100%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-size: contain;
+        background-position: center top;
+    }
+}
